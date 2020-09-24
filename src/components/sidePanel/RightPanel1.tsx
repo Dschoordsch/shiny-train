@@ -1,15 +1,10 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
-import { SidePanelContainer } from './SidePanelContainer';
-
-interface Props {
-  open: boolean;
-}
-
-export const RightPanel1 = (props: Props) => {
+export const RightPanel1 = () => {
   return (
-    <SidePanelContainer open={props.open}>
+    <Box>
       RightPanel1
-    </SidePanelContainer>
+    </Box>
   );
 };

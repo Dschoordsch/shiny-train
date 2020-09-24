@@ -17,12 +17,11 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme) => ({
   containerSize: {
-    //position: 'relative',
     width: (props: StyleProps) => (props.open ? `min(${PANEL_WIDTH}px, 50vw)` : 0),
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+//    transition: theme.transitions.create('width', {
+//      easing: theme.transitions.easing.easeOut,
+//      duration: theme.transitions.duration.enteringScreen,
+//    }),
     [theme.breakpoints.down('xs')]: {
       width: (props: StyleProps) => (props.open ? '100%' : 0),
     },
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     overflow: 'auto',
     height: 'auto',
-    //backgroundColor: (props: StyleProps) => (props.currentMenu === 'chat' ? 'transparent' : undefined),
   },
 }));
 
@@ -51,20 +49,18 @@ export const SpaceDrawer = (props: Props & DrawerProps) => {
   const classes = useStyles({ open: props.currentMenu !== undefined, currentMenu: props.currentMenu });
 
   return (
-    <>
-      <Drawer
-        open={props.currentMenu !== undefined && props.entries.includes(props.currentMenu)}
-        variant="persistent"
-        className={`${classes.drawer} ${classes.containerSize}`}
-        classes={{
-          paper: `${classes.drawerPaper} ${classes.containerSize}`,
-        }}
-        {..._.omit(props, 'currentMenu', 'entries')}
-      >
-        {props.entries.includes('left1') && <LeftPanel1 open={props.currentMenu === 'left1'} />}
-        {props.entries.includes('left2') && <LeftPanel2 open={props.currentMenu === 'left2'} />}
-        {props.entries.includes('right1') && <RightPanel1 open={props.currentMenu === 'right1'} />}
-      </Drawer>
-    </>
+    <Drawer
+      open={props.currentMenu !== undefined && props.entries.includes(props.currentMenu)}
+      variant="persistent"
+      className={`${classes.drawer} ${classes.containerSize}`}
+      classes={{
+        paper: `${classes.drawerPaper} ${classes.containerSize}`,
+      }}
+      {..._.omit(props, 'currentMenu', 'entries')}
+    >
+      {props.entries.includes('left1') && <LeftPanel1 />}
+      {props.entries.includes('left2') && <LeftPanel2 />}
+      {props.entries.includes('right1') && <RightPanel1 />}
+    </Drawer>
   );
 };
